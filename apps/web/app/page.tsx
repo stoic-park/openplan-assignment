@@ -1,5 +1,6 @@
 import { Button } from 'ui';
 import styles from './page.module.css';
+import Link from 'next/link';
 
 export default function Home() {
   const name = '박성택';
@@ -12,7 +13,9 @@ export default function Home() {
           <p className={styles.description}>{`${name} 입니다.`}</p>
         </div>
         <div className={styles.buttonSection}>
-          <Button>다음</Button>
+          <Link href="/result">
+            <Button>다음</Button>
+          </Link>
         </div>
       </div>
     </main>

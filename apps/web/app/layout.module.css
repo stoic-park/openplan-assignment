@@ -15,6 +15,8 @@
   width: 100%;
   height: 52px;
   background: transparent;
+  position: relative;
+  z-index: 10;
 }
 
 .headerContent {
@@ -29,6 +31,11 @@
   text-align: center;
   letter-spacing: -0.02em;
   color: #1a1a1a;
+}
+
+/* 결과 페이지에서 헤더 텍스트 색상 변경 */
+:global(.result-page) .headerContent {
+  color: #ffffff;
 }
 
 @media (max-width: 768px) {

@@ -1,0 +1,327 @@
+.main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+  padding: 0;
+  z-index: 2;
+}
+
+.content {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0px;
+  gap: 40px;
+  width: 100%;
+  max-width: 1440px;
+  height: 928px;
+  flex: none;
+  order: 2;
+  align-self: stretch;
+  flex-grow: 1;
+}
+
+.imageContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px 20px;
+  gap: 10px;
+  width: 50%;
+  max-width: 700px;
+  height: 485px;
+  flex: none;
+  order: 0;
+  flex-grow: 1;
+}
+
+.image {
+  width: 100%;
+  max-width: 660px;
+  height: auto;
+  aspect-ratio: 660 / 439.7;
+  border-radius: 24px;
+  object-fit: cover;
+  flex: none;
+  order: 0;
+  align-self: stretch;
+  flex-grow: 0;
+}
+
+.infoContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px 20px;
+  gap: 60px;
+  width: 50%;
+  max-width: 700px;
+  height: auto;
+  flex: none;
+  order: 1;
+  flex-grow: 1;
+}
+
+.infoWrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0px;
+  gap: 12px;
+  width: 100%;
+  max-width: 660px;
+  height: auto;
+  flex: none;
+  order: 0;
+  align-self: stretch;
+  flex-grow: 0;
+}
+
+.infoSection {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  padding: 20px;
+  gap: 16px;
+  width: 100%;
+  max-width: 660px;
+  height: 82px;
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.01);
+  border-radius: 16px;
+  flex: none;
+  order: 0;
+  align-self: stretch;
+  flex-grow: 0;
+  margin-bottom: 12px;
+}
+
+.infoSection:nth-child(3) {
+  height: 140px;
+  flex-direction: column;
+}
+
+.infoItem {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px;
+  width: calc(50% - 8px);
+  height: 42px;
+  flex: none;
+  flex-grow: 1;
+}
+
+.infoSection:nth-child(3) .infoItem {
+  width: 100%;
+  align-self: stretch;
+  flex-grow: 0;
+}
+
+.infoLabel {
+  font-family: 'Pretendard';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 15px;
+  line-height: 140%;
+  letter-spacing: -0.02em;
+  color: #111111;
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+}
+
+.infoValue {
+  font-family: 'Pretendard';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 15px;
+  line-height: 140%;
+  letter-spacing: -0.02em;
+  color: #111111;
+  opacity: 0.5;
+  flex: none;
+  order: 1;
+  flex-grow: 0;
+  word-break: break-all;
+}
+
+.infoValue a {
+  text-decoration-line: underline;
+}
+
+.buttonLink {
+  margin-top: 20px;
+  text-decoration: none;
+}
+
+.buttonLink button {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 12px;
+  gap: 6px;
+  width: 154px;
+  height: 48px;
+  background: #111111;
+  border-radius: 12px;
+  font-family: 'Pretendard';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 148%;
+  text-align: center;
+  letter-spacing: -0.02em;
+  color: #ffffff;
+}
+
+/* 태블릿 스타일 */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .content {
+    flex-direction: column;
+    gap: 40px;
+    padding: 0px;
+    width: 100%;
+    max-width: 768px;
+    height: auto;
+  }
+
+  .imageContainer {
+    width: 100%;
+    max-width: 768px;
+    height: auto;
+    padding: 0px 20px;
+    order: 2;
+    align-self: stretch;
+    flex-grow: 0;
+    z-index: 2;
+  }
+
+  .image {
+    width: 100%;
+    max-width: 728px;
+    height: auto;
+    aspect-ratio: 728 / 485;
+    border-radius: 24px;
+  }
+
+  .infoContainer {
+    width: 100%;
+    max-width: 768px;
+    height: auto;
+    padding: 0px 20px;
+    gap: 60px;
+    order: 3;
+    align-self: stretch;
+    flex-grow: 0;
+    z-index: 3;
+  }
+
+  .infoWrapper {
+    width: 100%;
+    max-width: 728px;
+    height: auto;
+  }
+
+  .infoSection {
+    width: 100%;
+    max-width: 728px;
+    height: 82px;
+  }
+
+  .infoItem {
+    width: calc(50% - 8px);
+    max-width: 336px;
+  }
+
+  .infoSection:nth-child(3) {
+    height: 140px;
+  }
+
+  .infoSection:nth-child(3) .infoItem {
+    width: 100%;
+    max-width: 688px;
+  }
+}
+
+/* 모바일 스타일 */
+@media (max-width: 768px) {
+  .content {
+    flex-direction: column;
+    gap: 40px;
+    padding: 0px;
+    width: 100%;
+    max-width: 375px;
+    height: auto;
+  }
+
+  .imageContainer {
+    width: 100%;
+    max-width: 375px;
+    height: auto;
+    padding: 0px 20px;
+    order: 2;
+    align-self: stretch;
+    flex-grow: 0;
+    z-index: 2;
+  }
+
+  .image {
+    width: 100%;
+    max-width: 335px;
+    height: auto;
+    aspect-ratio: 335 / 223.33;
+    border-radius: 24px;
+  }
+
+  .infoContainer {
+    width: 100%;
+    max-width: 375px;
+    height: auto;
+    padding: 0px 20px;
+    gap: 60px;
+    order: 3;
+    align-self: stretch;
+    flex-grow: 0;
+    z-index: 3;
+  }
+
+  .infoWrapper {
+    width: 100%;
+    max-width: 335px;
+    height: auto;
+    align-items: flex-start;
+  }
+
+  .infoSection {
+    width: 100%;
+    max-width: 335px;
+    height: auto;
+    min-height: 140px;
+    flex-direction: column;
+  }
+
+  .infoItem {
+    width: 100%;
+    max-width: 295px;
+    height: auto;
+    align-self: stretch;
+  }
+
+  .infoSection:nth-child(3) .infoItem {
+    width: 100%;
+    max-width: 295px;
+  }
+
+  .buttonLink button {
+    width: 100%;
+    max-width: 335px;
+    height: 48px;
+    align-self: stretch;
+  }
+}
