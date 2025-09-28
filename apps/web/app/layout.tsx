@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import './globals.css';
 import styles from './layout.module.css';
+import Providers from './providers';
 
 export const metadata: Metadata = {
   title: '오픈플랜 과제',
@@ -17,12 +18,14 @@ export default function RootLayout({
   return (
     <html lang="ko">
       <body>
-        <div className={styles.container}>
-          <header className={styles.header}>
-            <div className={styles.headerContent}>{name}</div>
-          </header>
-          {children}
-        </div>
+        <Providers>
+          <div className={styles.container}>
+            <header className={styles.header}>
+              <div className={styles.headerContent}>{name}</div>
+            </header>
+            {children}
+          </div>
+        </Providers>
       </body>
     </html>
   );

@@ -3,45 +3,18 @@
 import { Button } from 'ui';
 import styles from './page.module.css';
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
-
-interface PhotoData {
-  id: string;
-  author: string;
-  width: string;
-  height: string;
-  url: string;
-  download_url: string;
-}
+import { usePhotoData } from '../hooks/usePhoto';
+import { usePhotoStore } from '../stores/photoStore';
+import { useEffect } from 'react';
 
 export default function ResultPage() {
-  const [photoData, setPhotoData] = useState<PhotoData | null>(null);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string | null>(null);
+  const { currentPhotoId, visitedPhotoIds } = usePhotoStore();
+  const { data: photoData, isLoading, error } = usePhotoData(currentPhotoId);
 
   useEffect(() => {
-    const fetchPhotoData = async () => {
-      try {
-        setIsLoading(true);
-        const response = await fetch('https://picsum.photos/id/0/info');
-
-        if (!response.ok) {
-          throw new Error(`API 요청 실패: ${response.status}`);
-        }
-
-        const data = await response.json();
-        setPhotoData(data);
-        setError(null);
-      } catch (err) {
-        console.error('사진 데이터를 가져오는 중 오류 발생:', err);
-        setError('사진 정보를 불러오는 중 문제가 발생했습니다.');
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    fetchPhotoData();
-  }, []);
+    // 방문 기록 로그
+    console.log('방문한 사진 ID 목록:', visitedPhotoIds);
+  }, [visitedPhotoIds]);
 
   if (isLoading) {
     return (
@@ -60,7 +33,7 @@ export default function ResultPage() {
       <main className={styles.main}>
         <div className={styles.content}>
           <div className={styles.errorContainer}>
-            <p>{error || '사진 정보를 불러올 수 없습니다.'}</p>
+            <p>{error?.message || '사진 정보를 불러올 수 없습니다.'}</p>
             <Link href="/" className={styles.buttonLink}>
               <Button>메인으로 돌아가기</Button>
             </Link>
@@ -127,6 +100,14 @@ export default function ResultPage() {
                   </a>
                 </span>
               </div>
+            </div>
+            <div className={styles.visitHistorySection}>
+              <p className={styles.visitHistoryTitle}>방문 기록</p>
+              <p className={styles.visitHistoryText}>
+                {visitedPhotoIds.length > 0
+                  ? `지금까지 ${visitedPhotoIds.length}개의 사진을 보셨습니다.`
+                  : '아직 방문 기록이 없습니다.'}
+              </p>
             </div>
             <Link href="/" className={styles.buttonLink}>
               <Button>확인</Button>

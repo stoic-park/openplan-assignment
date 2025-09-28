@@ -1,9 +1,21 @@
+'use client';
+
 import { Button } from 'ui';
 import styles from './page.module.css';
-import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import { usePhotoStore } from './stores/photoStore';
 
 export default function Home() {
   const name = '박성택';
+  const router = useRouter();
+  const { setCurrentPhotoId, addVisitedPhotoId } = usePhotoStore();
+
+  const handleButtonClick = () => {
+    const photoId = '0';
+    setCurrentPhotoId(photoId);
+    addVisitedPhotoId(photoId);
+    router.push('/result');
+  };
 
   return (
     <main className={styles.main}>
@@ -13,9 +25,7 @@ export default function Home() {
           <p className={styles.description}>{`${name} 입니다.`}</p>
         </div>
         <div className={styles.buttonSection}>
-          <Link href="/result">
-            <Button>다음</Button>
-          </Link>
+          <Button onClick={handleButtonClick}>다음</Button>
         </div>
       </div>
     </main>
