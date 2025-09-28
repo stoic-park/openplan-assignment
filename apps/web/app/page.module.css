@@ -1,28 +1,94 @@
 .main {
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   align-items: center;
+  flex: 1;
+  padding: 0;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
   justify-content: center;
-  min-height: 100vh;
-  padding: 24px;
+  align-items: center;
+  width: 100%;
+  max-width: 1440px;
+  height: calc(100vh - 52px);
+  padding: 10px;
+  gap: 267px;
+}
+
+.textContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  flex: 1;
 }
 
 .title {
-  font-size: 2rem;
-  font-weight: 700;
-  margin-bottom: 16px;
+  font-family: 'Pretendard';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 32px;
+  line-height: 140%;
+  text-align: center;
+  letter-spacing: -0.02em;
+  color: #111111;
+  margin-bottom: 8px;
 }
 
 .description {
-  font-size: 1.2rem;
-  color: #666;
-  margin-bottom: 32px;
+  font-family: 'Pretendard';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 32px;
+  line-height: 140%;
+  text-align: center;
+  letter-spacing: -0.02em;
+  color: #111111;
 }
 
-.buttonContainer {
+.buttonSection {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 20px;
   width: 100%;
-  max-width: 335px;
+  margin-bottom: 40px;
+}
+
+/* 모바일 스타일 */
+@media (max-width: 768px) {
+  .content {
+    gap: 100px;
+  }
+
+  .title,
+  .description {
+    font-size: 24px;
+  }
+
+  .buttonSection {
+    padding: 20px 16px;
+  }
+}
+
+/* 태블릿 스타일 */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .content {
+    gap: 180px;
+  }
+
+  .title,
+  .description {
+    font-size: 28px;
+  }
+
+  .buttonSection {
+    padding: 30px 18px;
+  }
 }

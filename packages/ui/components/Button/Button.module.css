@@ -10,8 +10,13 @@
   border-radius: 12px;
   border: none;
   cursor: pointer;
+  font-family: 'Pretendard';
+  font-style: normal;
+  font-weight: 600;
   font-size: 16px;
-  font-weight: 500;
+  line-height: 148%;
+  text-align: center;
+  letter-spacing: -0.02em;
   transition: background-color 0.2s ease;
 }
 
@@ -20,7 +25,8 @@
   color: #ffffff;
 }
 
-.default:hover, .default:active {
+.default:hover,
+.default:active {
   background: rgba(17, 17, 17, 0.8);
 }
 
@@ -40,7 +46,7 @@
 }
 
 .loading::after {
-  content: "";
+  content: '';
   position: absolute;
   width: 16px;
   height: 16px;
@@ -51,6 +57,37 @@
 }
 
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* 데스크탑 스타일 */
+@media (min-width: 1025px) {
+  .button {
+    width: 335px;
+    height: 60px;
+    font-size: 24px;
+  }
+}
+
+/* 태블릿 스타일 */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .button {
+    width: 280px;
+    height: 54px;
+    font-size: 20px;
+  }
+}
+
+/* 모바일 스타일 */
+@media (max-width: 768px) {
+  .button {
+    width: 240px;
+    height: 48px;
+    font-size: 16px;
+  }
 }
