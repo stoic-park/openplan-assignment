@@ -2,19 +2,42 @@
 
 import { Button } from 'ui';
 import styles from './page.module.css';
-import Link from 'next/link';
 import { usePhotoData } from '../hooks/usePhoto';
 import { usePhotoStore } from '../stores/photoStore';
-import { useEffect } from 'react';
+import { useEffect, useState, useCallback } from 'react';
+import { useRouter } from 'next/navigation';
+import { debounce } from '../utils/debounceThrottle';
 
 export default function ResultPage() {
+  const router = useRouter();
   const { currentPhotoId, visitedPhotoIds } = usePhotoStore();
   const { data: photoData, isLoading, error } = usePhotoData(currentPhotoId);
+  const [isButtonLoading, setIsButtonLoading] = useState(false);
 
   useEffect(() => {
     // 방문 기록 로그
     console.log('방문한 사진 ID 목록:', visitedPhotoIds);
   }, [visitedPhotoIds]);
+
+  // 디바운스 적용된 버튼 클릭 핸들러
+  const debouncedButtonClick = useCallback(
+    debounce(() => {
+      setIsButtonLoading(true);
+
+      // 로딩 애니메이션을 위한 지연
+      setTimeout(() => {
+        router.push('/');
+      }, 800);
+    }, 500),
+    [router]
+  );
+
+  const handleButtonClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    if (!isButtonLoading) {
+      debouncedButtonClick();
+    }
+  };
 
   if (isLoading) {
     return (
@@ -34,9 +57,11 @@ export default function ResultPage() {
         <div className={styles.content}>
           <div className={styles.errorContainer}>
             <p>{error?.message || '사진 정보를 불러올 수 없습니다.'}</p>
-            <Link href="/" className={styles.buttonLink}>
-              <Button>메인으로 돌아가기</Button>
-            </Link>
+            <div className={styles.buttonLink}>
+              <Button onClick={handleButtonClick} isLoading={isButtonLoading}>
+                메인으로 돌아가기
+              </Button>
+            </div>
           </div>
         </div>
       </main>
@@ -109,9 +134,11 @@ export default function ResultPage() {
                   : '아직 방문 기록이 없습니다.'}
               </p>
             </div>
-            <Link href="/" className={styles.buttonLink}>
-              <Button>확인</Button>
-            </Link>
+            <div className={styles.buttonLink}>
+              <Button onClick={handleButtonClick} isLoading={isButtonLoading}>
+                {isButtonLoading ? '로딩 중...' : '확인'}
+              </Button>
+            </div>
           </div>
         </div>
       </div>

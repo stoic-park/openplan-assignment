@@ -5,7 +5,7 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   children: React.ReactNode;
   disabled?: boolean;
   isLoading?: boolean;
-  onClick?: () => void;
+  onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
   className?: string;
 }
 
@@ -27,11 +27,17 @@ export const Button = ({
     .filter(Boolean)
     .join(' ');
 
+  const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    if (!disabled && !isLoading && onClick) {
+      onClick(e);
+    }
+  };
+
   return (
     <button
       className={buttonClasses}
       disabled={disabled || isLoading}
-      onClick={onClick}
+      onClick={handleClick}
       {...props}
     >
       <span>{children}</span>
