@@ -154,44 +154,6 @@
   text-decoration-line: underline;
 }
 
-.visitHistorySection {
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  padding: 20px;
-  gap: 8px;
-  width: 100%;
-  max-width: 660px;
-  background: #ffffff;
-  border: 1px solid rgba(0, 0, 0, 0.01);
-  border-radius: 16px;
-  margin-bottom: 12px;
-}
-
-.visitHistoryTitle {
-  font-family: 'Pretendard';
-  font-style: normal;
-  font-weight: 600;
-  font-size: 16px;
-  line-height: 140%;
-  letter-spacing: -0.02em;
-  color: #111111;
-  margin: 0;
-}
-
-.visitHistoryText {
-  font-family: 'Pretendard';
-  font-style: normal;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 140%;
-  letter-spacing: -0.02em;
-  color: #111111;
-  opacity: 0.7;
-  margin: 0;
-}
-
 .buttonLink {
   margin-top: 20px;
   text-decoration: none;
@@ -220,7 +182,8 @@
 
 /* 로딩 및 에러 상태 스타일 */
 .loadingContainer,
-.errorContainer {
+.errorContainer,
+.redirectContainer {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -231,7 +194,8 @@
 }
 
 .loadingContainer p,
-.errorContainer p {
+.errorContainer p,
+.redirectMessage {
   font-family: 'Pretendard';
   font-style: normal;
   font-weight: 500;
@@ -239,6 +203,22 @@
   line-height: 1.5;
   color: #ffffff;
   margin-bottom: 20px;
+  padding: 20px 30px;
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 12px;
+  animation: fadeInOut 2s infinite;
+}
+
+@keyframes fadeInOut {
+  0% {
+    opacity: 0.7;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.7;
+  }
 }
 
 .errorContainer .buttonLink {
@@ -299,11 +279,6 @@
     height: 82px;
   }
 
-  .visitHistorySection {
-    width: 100%;
-    max-width: 728px;
-  }
-
   .infoItem {
     width: calc(50% - 8px);
     max-width: 336px;
@@ -319,7 +294,8 @@
   }
 
   .loadingContainer,
-  .errorContainer {
+  .errorContainer,
+  .redirectContainer {
     height: 300px;
   }
 }
@@ -381,11 +357,6 @@
     flex-direction: column;
   }
 
-  .visitHistorySection {
-    width: 100%;
-    max-width: 335px;
-  }
-
   .infoItem {
     width: 100%;
     max-width: 295px;
@@ -406,13 +377,15 @@
   }
 
   .loadingContainer,
-  .errorContainer {
+  .errorContainer,
+  .redirectContainer {
     height: 250px;
   }
 
   .loadingContainer p,
-  .errorContainer p {
+  .errorContainer p,
+  .redirectMessage {
     font-size: 16px;
-    padding: 0 20px;
+    padding: 16px 20px;
   }
 }

@@ -4,36 +4,59 @@ import { Button } from 'ui';
 import styles from './page.module.css';
 import { usePhotoData } from '../hooks/usePhoto';
 import { usePhotoStore } from '../stores/photoStore';
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { debounce } from '../utils/debounceThrottle';
 import Skeleton from '../components/Skeleton';
 
 export default function ResultPage() {
   const router = useRouter();
-  const { currentPhotoId } = usePhotoStore();
+  const { currentPhotoId, visitedPhotoIds } = usePhotoStore();
   const { data: photoData, isLoading, error } = usePhotoData(currentPhotoId);
   const [isButtonLoading, setIsButtonLoading] = useState(false);
+  const [redirectMessage, setRedirectMessage] = useState<string | null>(null);
 
-  // 디바운스 적용된 버튼 클릭 핸들러
-  const debouncedButtonClick = useCallback(
-    debounce(() => {
+  // 사진 조회 이력이 없을 경우 메인 페이지로 리다이렉트
+  useEffect(() => {
+    let timer: NodeJS.Timeout;
+
+    if (visitedPhotoIds.length === 0) {
+      setRedirectMessage(
+        '사진 조회 이력이 없습니다. 메인 페이지로 이동합니다...'
+      );
+
+      timer = setTimeout(() => {
+        router.push('/');
+      }, 2000);
+    }
+
+    return () => {
+      if (timer) clearTimeout(timer);
+    };
+  }, []); // 컴포넌트 마운트 시 한 번만 실행
+
+  // 버튼 클릭 핸들러
+  const handleButtonClick = useCallback(() => {
+    if (!isButtonLoading) {
       setIsButtonLoading(true);
 
       // 로딩 애니메이션을 위한 지연
       setTimeout(() => {
         router.push('/');
       }, 800);
-    }, 500),
-    [router]
-  );
-
-  const handleButtonClick = (e: React.MouseEvent) => {
-    e.preventDefault();
-    if (!isButtonLoading) {
-      debouncedButtonClick();
     }
-  };
+  }, [isButtonLoading, router]);
+
+  if (redirectMessage) {
+    return (
+      <main className={styles.main}>
+        <div className={styles.content}>
+          <div className={styles.redirectContainer}>
+            <p className={styles.redirectMessage}>{redirectMessage}</p>
+          </div>
+        </div>
+      </main>
+    );
+  }
 
   if (error) {
     return (
